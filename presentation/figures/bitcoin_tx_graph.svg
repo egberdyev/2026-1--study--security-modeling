@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 220" font-family="Calibri, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#4a90d9"/>
+    </marker>
+  </defs>
+  <rect width="520" height="220" fill="#f8fafc"/>
+  <!-- Addresses -->
+  <rect x="20" y="18" width="52" height="28" rx="4" fill="#e8eef5" stroke="#5a7a9a"/>
+  <text x="46" y="36" text-anchor="middle" font-size="13" fill="#1a2a3a">A1</text>
+  <rect x="90" y="18" width="52" height="28" rx="4" fill="#e8eef5" stroke="#5a7a9a"/>
+  <text x="116" y="36" text-anchor="middle" font-size="13" fill="#1a2a3a">A2</text>
+  <rect x="380" y="18" width="52" height="28" rx="4" fill="#e8eef5" stroke="#5a7a9a"/>
+  <text x="406" y="36" text-anchor="middle" font-size="13" fill="#1a2a3a">A3</text>
+  <!-- Tx1 -->
+  <rect x="55" y="78" width="72" height="36" rx="6" fill="#0077b6" stroke="#005f8f"/>
+  <text x="91" y="101" text-anchor="middle" font-size="14" fill="#fff" font-weight="bold">Tx1</text>
+  <!-- Outputs from Tx1 -->
+  <rect x="10" y="150" width="52" height="28" rx="4" fill="#e8eef5" stroke="#5a7a9a"/>
+  <text x="36" y="168" text-anchor="middle" font-size="13" fill="#1a2a3a">A4</text>
+  <rect x="75" y="150" width="52" height="28" rx="4" fill="#e8eef5" stroke="#5a7a9a"/>
+  <text x="101" y="168" text-anchor="middle" font-size="13" fill="#1a2a3a">A5</text>
+  <rect x="140" y="150" width="52" height="28" rx="4" fill="#e8eef5" stroke="#5a7a9a"/>
+  <text x="166" y="168" text-anchor="middle" font-size="13" fill="#1a2a3a">A6</text>
+  <!-- Tx2 -->
+  <rect x="300" y="78" width="72" height="36" rx="6" fill="#0077b6" stroke="#005f8f"/>
+  <text x="336" y="101" text-anchor="middle" font-size="14" fill="#fff" font-weight="bold">Tx2</text>
+  <rect x="260" y="150" width="52" height="28" rx="4" fill="#e8eef5" stroke="#5a7a9a"/>
+  <text x="286" y="168" text-anchor="middle" font-size="13" fill="#1a2a3a">A7</text>
+  <rect x="400" y="150" width="52" height="28" rx="4" fill="#e8eef5" stroke="#5a7a9a"/>
+  <text x="426" y="168" text-anchor="middle" font-size="13" fill="#1a2a3a">A8</text>
+  <!-- Edges -->
+  <line x1="46" y1="46" x2="75" y2="78" stroke="#4a90d9" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="116" y1="46" x2="100" y2="78" stroke="#4a90d9" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="75" y1="114" x2="36" y2="150" stroke="#4a90d9" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="91" y1="114" x2="101" y2="150" stroke="#4a90d9" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="107" y1="114" x2="166" y2="150" stroke="#4a90d9" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="406" y1="46" x2="336" y2="78" stroke="#4a90d9" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="320" y1="114" x2="286" y2="150" stroke="#4a90d9" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="352" y1="114" x2="426" y2="150" stroke="#4a90d9" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="166" y1="164" x2="300" y2="96" stroke="#4a90d9" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arrow)"/>
+  <!-- Legend -->
+  <rect x="20" y="195" width="14" height="14" fill="#e8eef5" stroke="#5a7a9a"/>
+  <text x="40" y="206" font-size="11" fill="#333">[A]  04@5A :>H5;L:0</text>
+  <rect x="200" y="195" width="14" height="14" fill="#0077b6" stroke="#005f8f"/>
+  <text x="220" y="206" font-size="11" fill="#333">(Tx)  B@0=70:F8O</text>
+</svg>
