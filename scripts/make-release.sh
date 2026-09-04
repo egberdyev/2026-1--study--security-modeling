@@ -81,6 +81,9 @@ build_one () {
     if [ -d "${labdir}/project/docs" ]; then
         cp -R "${labdir}/project/docs" "${tmp}/${base}-sources/"
     fi
+    if [ -d "${labdir}/project/notebooks" ]; then
+        cp -R "${labdir}/project/notebooks" "${tmp}/${base}-sources/"
+    fi
 
     (cd "${tmp}" && zip -qr "${outdir}/${base}-sources.zip" "${base}-sources")
     rm -rf "${tmp}"
