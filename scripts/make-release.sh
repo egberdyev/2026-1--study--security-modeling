@@ -88,6 +88,13 @@ build_one () {
     (cd "${tmp}" && zip -qr "${outdir}/${base}-sources.zip" "${base}-sources")
     rm -rf "${tmp}"
 
+    # GitVerse не принимает .html как файл релиза («Invalid file format»),
+    # поэтому презентация в html дополнительно кладётся в архив.
+    if [ -f "${outdir}/${base}-presentation.html" ]; then
+        (cd "${outdir}" && zip -q "${base}-presentation-html.zip" \
+            "${base}-presentation.html")
+    fi
+
     echo "== ${lab}: файлы релиза в ${outdir}"
     ls -1 "${outdir}"
 
