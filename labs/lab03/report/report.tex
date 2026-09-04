@@ -1,0 +1,650 @@
+% Options for packages loaded elsewhere
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  english,
+  russian,
+  12pt,
+  a4paper,
+  DIV=11,
+  numbers=noendperiod]{scrreprt}
+\usepackage{xcolor}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{5}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage{setspace}
+% Make \paragraph and \subparagraph free-standing
+\makeatletter
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}{
+    \@ifstar
+      \xxxParagraphStar
+      \xxxParagraphNoStar
+  }
+  \newcommand{\xxxParagraphStar}[1]{\oldparagraph*{#1}\mbox{}}
+  \newcommand{\xxxParagraphNoStar}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}{
+    \@ifstar
+      \xxxSubParagraphStar
+      \xxxSubParagraphNoStar
+  }
+  \newcommand{\xxxSubParagraphStar}[1]{\oldsubparagraph*{#1}\mbox{}}
+  \newcommand{\xxxSubParagraphNoStar}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+\makeatother
+
+
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+
+
+% definitions for citeproc citations
+\NewDocumentCommand\citeproctext{}{}
+\NewDocumentCommand\citeproc{mm}{%
+  \begingroup\def\citeproctext{#2}\cite{#1}\endgroup}
+\makeatletter
+ % allow citations to break across lines
+ \let\@cite@ofmt\@firstofone
+ % avoid brackets around text for \cite:
+ \def\@biblabel#1{}
+ \def\@cite#1#2{{#1\if@tempswa , #2\fi}}
+\makeatother
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newenvironment{CSLReferences}[2] % #1 hanging-indent, #2 entry-spacing
+ {\begin{list}{}{%
+  \setlength{\itemindent}{0pt}
+  \setlength{\leftmargin}{0pt}
+  \setlength{\parsep}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1
+   \setlength{\leftmargin}{\cslhangindent}
+   \setlength{\itemindent}{-1\cslhangindent}
+  \fi
+  % set entry spacing
+  \setlength{\itemsep}{#2\baselineskip}}}
+ {\end{list}}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{\hfill\break\parbox[t]{\linewidth}{\strut\ignorespaces#1\strut}}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{\strut#1\strut}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{\strut#1\strut}}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+
+\ifLuaTeX
+\usepackage[bidi=basic,provide=*]{babel}
+\else
+\usepackage[bidi=default,provide=*]{babel}
+\fi
+% get rid of language-specific shorthands (see #6817):
+\let\LanguageShortHands\languageshorthands
+\def\languageshorthands#1{}
+
+
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+
+
+ 
+
+\usepackage[]{csquotes}
+
+\usepackage{indentfirst}
+\usepackage{float}
+\floatplacement{figure}{H}
+\IfFileExists{plex-otf.sty}{
+  %% Full TeXlive
+  \usepackage[
+    % math,
+    RM={Scale=0.94},SS={Scale=0.94},SScon={Scale=0.94},TT={Scale=MatchLowercase,FakeStretch=0.9},
+    DefaultFeatures={Ligatures=Common}
+  ]{plex-otf}
+  % \usepackage[Scale=MatchUppercase]{juliamono}
+}{
+  %% TinyTeX
+  \usepackage{libertine}
+}
+\KOMAoption{captions}{tableheading}
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Содержание}
+\else
+  \newcommand\contentsname{Содержание}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{Список иллюстраций}
+\else
+  \newcommand\listfigurename{Список иллюстраций}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{Список таблиц}
+\else
+  \newcommand\listtablename{Список таблиц}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Рис.}
+\else
+  \newcommand\figurename{Рис.}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Табл.}
+\else
+  \newcommand\tablename{Табл.}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Листинг}
+\newcommand*\listoflistings{\listof{codelisting}{Список листингов}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Моделирование и анализ графов атак},
+  pdfauthor={Бердыев Эзиз},
+  pdflang={ru-RU},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+
+\title{Моделирование и анализ графов атак}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{Лабораторная работа №3}
+\author{Бердыев Эзиз}
+\date{}
+\begin{document}
+\maketitle
+
+\renewcommand*\contentsname{Содержание}
+{
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+\listoffigures
+
+\setstretch{1.5}
+\chapter{Цель
+работы}\label{ux446ux435ux43bux44c-ux440ux430ux431ux43eux442ux44b}
+
+Целью лабораторной работы является изучение методов построения и анализа
+графов атак для оценки уязвимостей сетевой инфраструктуры.
+
+В рамках работы необходимо не только реализовать алгоритмы, но и глубоко
+понять, каким образом графовые модели позволяют формализовать процесс
+атаки, выявлять потенциальные уязвимости и находить критические узлы
+сети.
+
+Дополнительно целью является освоение языка программирования Julia,
+использование специализированных библиотек для работы с графами, а также
+получение практического опыта проведения вычислительных экспериментов.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\chapter{Задание}\label{ux437ux430ux434ux430ux43dux438ux435}
+
+В рамках лабораторной работы требуется:
+
+\begin{itemize}
+\tightlist
+\item
+  построить граф атак для заданной сети;
+\item
+  реализовать алгоритм поиска всех путей атаки;
+\item
+  вычислить метрики центральности;
+\item
+  оценить вероятность успешной атаки;
+\item
+  визуализировать граф;
+\item
+  провести анализ масштабируемости;
+\item
+  выполнить параметрическое исследование.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\chapter{Теоретическое
+введение}\label{ux442ux435ux43eux440ux435ux442ux438ux447ux435ux441ux43aux43eux435-ux432ux432ux435ux434ux435ux43dux438ux435}
+
+Граф атак представляет собой ориентированный граф, в котором вершины
+соответствуют состояниям системы (например, узлам сети), а рёбра ---
+возможным действиям злоумышленника.
+
+Такая модель позволяет формализовать процесс проникновения в систему и
+анализировать различные сценарии атак.
+
+\section{Поиск путей
+атаки}\label{ux43fux43eux438ux441ux43a-ux43fux443ux442ux435ux439-ux430ux442ux430ux43aux438}
+
+Для анализа используются алгоритмы:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{DFS (поиск в глубину)} --- позволяет найти все возможные пути
+  атаки;
+\item
+  \textbf{алгоритм Дейкстры} --- используется для поиска наиболее
+  вероятного пути.
+\end{itemize}
+
+DFS особенно важен, так как позволяет выявить все потенциальные сценарии
+атаки, однако его вычислительная сложность может быть высокой.
+
+\section{Метрики
+центральности}\label{ux43cux435ux442ux440ux438ux43aux438-ux446ux435ux43dux442ux440ux430ux43bux44cux43dux43eux441ux442ux438}
+
+Для выявления критических узлов применяются:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{in-degree} --- показывает, сколько атак направлено в узел;
+\item
+  \textbf{betweenness centrality} --- отражает роль узла как посредника;
+\item
+  \textbf{closeness centrality} --- показывает близость к другим узлам;
+\item
+  \textbf{PageRank} --- оценивает важность узла в сети.
+\end{itemize}
+
+\section{Вероятность
+атаки}\label{ux432ux435ux440ux43eux44fux442ux43dux43eux441ux442ux44c-ux430ux442ux430ux43aux438}
+
+Если каждому ребру задать вероятность, то вероятность пути вычисляется
+как произведение вероятностей всех рёбер.
+
+Для нахождения наиболее вероятного пути используется преобразование
+через логарифмы и алгоритм Дейкстры.
+
+Теоретическая база работы основана на материалах курса {[}1{]}.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\chapter{Выполнение лабораторной
+работы}\label{ux432ux44bux43fux43eux43bux43dux435ux43dux438ux435-ux43bux430ux431ux43eux440ux430ux442ux43eux440ux43dux43eux439-ux440ux430ux431ux43eux442ux44b}
+
+\section{Реализация графа
+атак}\label{ux440ux435ux430ux43bux438ux437ux430ux446ux438ux44f-ux433ux440ux430ux444ux430-ux430ux442ux430ux43a}
+
+На данном этапе реализуется функция создания ориентированного графа (см.
+рис. рис.~\ref{fig-1}).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/1_attack1_code.png}
+
+}
+
+\caption{\label{fig-1}Код построения графа атак (1)}
+
+\end{figure}%
+
+Дополнительно вводятся доверительные отношения между узлами (см. рис.
+рис.~\ref{fig-2}).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/2_attack2_code.png}
+
+}
+
+\caption{\label{fig-2}Код построения графа атак (2)}
+
+\end{figure}%
+
+Реализован алгоритм поиска всех возможных путей атаки (см. рис.
+рис.~\ref{fig-3}).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/3_attack3_code.png}
+
+}
+
+\caption{\label{fig-3}Поиск путей (DFS)}
+
+\end{figure}%
+
+На данном этапе вычисляются метрики центральности (см. рис.
+рис.~\ref{fig-4}).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/4_attack4_code.png}
+
+}
+
+\caption{\label{fig-4}Метрики центральности}
+
+\end{figure}%
+
+Реализуется алгоритм PageRank (см. рис. рис.~\ref{fig-5}).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/5_attack5_code.png}
+
+}
+
+\caption{\label{fig-5}PageRank}
+
+\end{figure}%
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Запуск
+эксперимента}\label{ux437ux430ux43fux443ux441ux43a-ux44dux43aux441ux43fux435ux440ux438ux43cux435ux43dux442ux430}
+
+В данном скрипте задаются параметры эксперимента (см. рис.
+рис.~\ref{fig-6}).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/6_ag_run_code.png}
+
+}
+
+\caption{\label{fig-6}Код эксперимента}
+
+\end{figure}%
+
+Результаты выполнения представлены ниже (см. рис. рис.~\ref{fig-7}).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/7_ag_run_terminal_result.png}
+
+}
+
+\caption{\label{fig-7}Результаты выполнения}
+
+\end{figure}%
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Визуализация
+графа}\label{ux432ux438ux437ux443ux430ux43bux438ux437ux430ux446ux438ux44f-ux433ux440ux430ux444ux430}
+
+Граф атак визуализируется с использованием цветовой шкалы (см. рис.
+рис.~\ref{fig-8}).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/8_attack_graph_png.png}
+
+}
+
+\caption{\label{fig-8}Граф атак}
+
+\end{figure}%
+
+Анализ графа представлен в терминале (см. рис. рис.~\ref{fig-9} и
+рис.~\ref{fig-10}).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/9_attack_graph_terminal1.png}
+
+}
+
+\caption{\label{fig-9}Анализ графа}
+
+\end{figure}%
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/10_attack_graph_terminal2.png}
+
+}
+
+\caption{\label{fig-10}Анализ графа}
+
+\end{figure}%
+
+Скрипт анализа показан ниже (см. рис. рис.~\ref{fig-11}).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/11_ag_analyze.png}
+
+}
+
+\caption{\label{fig-11}Код анализа}
+
+\end{figure}%
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Исследование
+масштабируемости}\label{ux438ux441ux441ux43bux435ux434ux43eux432ux430ux43dux438ux435-ux43cux430ux441ux448ux442ux430ux431ux438ux440ux443ux435ux43cux43eux441ux442ux438}
+
+Проводится эксперимент зависимости времени работы от размера сети (см.
+рис. рис.~\ref{fig-12}).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/12_ag_convergence_code.png}
+
+}
+
+\caption{\label{fig-12}Код исследования}
+
+\end{figure}%
+
+Результаты представлены ниже (см. рис. рис.~\ref{fig-13}).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/13_convergence_png.png}
+
+}
+
+\caption{\label{fig-13}Результаты}
+
+\end{figure}%
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Параметрическое
+исследование}\label{ux43fux430ux440ux430ux43cux435ux442ux440ux438ux447ux435ux441ux43aux43eux435-ux438ux441ux441ux43bux435ux434ux43eux432ux430ux43dux438ux435}
+
+Изменяется плотность рёбер (см. рис. рис.~\ref{fig-14}).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/14_parameter_sweep_code.png}
+
+}
+
+\caption{\label{fig-14}Код}
+
+\end{figure}%
+
+Результаты представлены ниже (см. рис. рис.~\ref{fig-15}).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/15_parameter_sweep_png.png}
+
+}
+
+\caption{\label{fig-15}Результаты}
+
+\end{figure}%
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\chapter{Ответы на контрольные
+вопросы}\label{ux43eux442ux432ux435ux442ux44b-ux43dux430-ux43aux43eux43dux442ux440ux43eux43bux44cux43dux44bux435-ux432ux43eux43fux440ux43eux441ux44b}
+
+\textbf{1. Что такое граф атак?}\\
+Граф атак --- это модель, описывающая возможные пути злоумышленника в
+системе.
+
+\textbf{2. Какие алгоритмы используются?}\\
+DFS для поиска всех путей и алгоритм Дейкстры для поиска оптимального
+пути.
+
+\textbf{3. Что означают метрики центральности?}\\
+Они показывают важность узлов и их роль в распространении атак.
+
+\textbf{4. Как оценивается вероятность атаки?}\\
+Как произведение вероятностей рёбер.
+
+\textbf{5. Ограничения модели?}\\
+Модель является упрощённой и не учитывает динамику системы.
+
+\textbf{6. Как расширить модель?}\\
+Можно добавить механизмы защиты, например, фильтрацию рёбер.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\chapter{Выводы}\label{ux432ux44bux432ux43eux434ux44b}
+
+В ходе лабораторной работы была реализована модель графа атак и проведён
+её анализ.
+
+Были получены следующие результаты:
+
+\begin{itemize}
+\tightlist
+\item
+  реализованы алгоритмы построения графа;
+\item
+  выполнен поиск всех путей атаки;
+\item
+  рассчитаны метрики центральности;
+\item
+  проведена оценка вероятности атак;
+\item
+  выполнена визуализация;
+\item
+  проведены вычислительные эксперименты.
+\end{itemize}
+
+Анализ показал, что с увеличением размера сети резко возрастает
+количество возможных путей атаки, что усложняет анализ системы.
+
+Таким образом, графы атак являются эффективным инструментом анализа
+безопасности, однако требуют оптимизации при работе с большими
+системами.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\chapter*{Список
+литературы}\label{ux441ux43fux438ux441ux43eux43a-ux43bux438ux442ux435ux440ux430ux442ux443ux440ux44b}
+\addcontentsline{toc}{chapter}{Список литературы}
+
+\phantomsection\label{refs}
+\begin{CSLReferences}{0}{0}
+\bibitem[\citeproctext]{ref-rudn_course}
+\CSLLeftMargin{1. }%
+\CSLRightInline{Российский университет дружбы народов.
+\href{https://esystem.rudn.ru/mod/resource/view.php?id=1359126}{{Методы
+математического моделирования в кибербезопасности}}. 2026.}
+
+\end{CSLReferences}
+
+
+
+
+\end{document}
