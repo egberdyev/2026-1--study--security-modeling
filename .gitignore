@@ -1,0 +1,9 @@
+# Служебные файлы macOS
+.DS_Store
+
+# Кэш Quarto
+.quarto/
+**/*.quarto_ipynb
+
+# Каталог сборки файлов релиза (создаётся scripts/make-release.sh)
+/release/

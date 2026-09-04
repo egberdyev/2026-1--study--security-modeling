@@ -1,49 +1,58 @@
 project:
   title: "report"
   output-dir: "_output"
+  render:
+    - "*-report.qmd"
 
 standalone: true
 self-contained: true
-
-## Julia support
-# engine: julia
-# julia:
-#   exeflags: ["--project=../project"]
 
 ## Generic options
 lang: ru-RU
 number-sections: true
 toc: true
 toc-title: "Содержание"
-toc-depth: 2
+toc-depth: 3
+
 ## Crossref customization
 crossref:
   lof-title: "Список иллюстраций"
   lot-title: "Список таблиц"
-  lol-title: "Листинги"
+  lol-title: "Список листингов"
+  fig-title: "Рис."
+  tbl-title: "Табл."
+  lst-title: "Листинг"
+  fig-prefix: "рис."
+  tbl-prefix: "табл."
+  lst-prefix: "листинг"
+  eq-prefix: "ур."
+
 ## Bibliography
 bibliography:
   - bib/cite.bib
 csl: _resources/csl/gost-r-7-0-5-2008-numeric.csl
+
 ## Formats
 format:
+  ### Markdown output format (источник отчёта в markdown)
+  gfm:
+    toc: true
+    number-sections: true
   ### Docx output format
   docx:
     toc: true
     number-sections: true
-    toc-depth: 2
+    toc-depth: 3
   ### Pdf output format
   pdf:
-    # pdf-engine: xelatex
-    ### minted support
-    # filters:
-    #   - minted-quarto
+    pdf-engine: xelatex
     toc: true
     number-sections: true
     colorlinks: false
-    toc-depth: 2
+    toc-depth: 3
     lof: true # List of figures
     lot: true # List of tables
+    lol: true # List of listings
     #### Document
     documentclass: scrreprt
     papersize: a4
@@ -53,12 +62,7 @@ format:
     babel-lang: russian
     babel-otherlangs: english
     #### Biblatex
-    cite-method: biblatex
-    biblio-style: gost-numeric
-    biblatexoptions:
-      - backend=biber
-      - langhook=extras
-      - autolang=other*
+    cite-method: citeproc
     #### Misc options
     csquotes: true
     indent: true
