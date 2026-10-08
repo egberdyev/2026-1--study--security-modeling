@@ -31,3 +31,4 @@ heatmap(
     title = "Средний выигрыш Нападающего",
 )
 savefig(plotsdir("heatmap_UA.png"))
+
