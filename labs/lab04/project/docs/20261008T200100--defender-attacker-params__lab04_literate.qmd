@@ -1,0 +1,86 @@
+# Модель «Защитник–Нападающий»: расчёт для набора параметров
+
+Лабораторная работа № 4. Бердыев Эзиз, НФИмд-01-25.
+
+Литературный код с параметрами: модель считается на всей сетке
+значений ценностей активов и затрат, результаты сохраняются и
+визуализируются.
+
+```{julia}
+using DrWatson
+@quickactivate "project"
+
+using Plots, DataFrames, Statistics
+include(srcdir("simulation.jl"))
+```
+
+## Сетка параметров
+
+$V_1, V_2 \in \{5, 10, 15\}$, $c_a, c_d \in \{0, 1, 3\}$ —
+всего $3 \cdot 3 \cdot 3 \cdot 3 = 81$ вариант.
+
+```{julia}
+params_list = generate_params()
+println("Число вариантов: ", length(params_list))
+```
+
+## Расчёт всех вариантов
+
+Для каждого набора строим матрицы, ищем равновесие и считаем
+выигрыши. Таблица сохраняется в `data/sims/results.csv`.
+
+```{julia}
+results = main_simulations()
+first(results, 5)
+```
+
+## Сколько равновесий каждого типа
+
+```{julia}
+combine(groupby(results, :type), nrow => :count)
+```
+
+## Стратегия Нападающего от отношения ценностей
+
+Фиксируем затраты $c_a = c_d = 1$ и смотрим, как вероятность атаки
+на первый актив зависит от $V_1 / V_2$.
+
+```{julia}
+filtered = results[(results.c_a .== 1.0) .& (results.c_d .== 1.0), :]
+ratio = filtered.V1 ./ filtered.V2
+scatter(ratio, filtered.p_1, group = filtered.type,
+    xlabel = "V1 / V2", ylabel = "p1 (вероятность атаки на актив 1)",
+    title = "Стратегия Нападающего (c_a=1, c_d=1)", legend = :topright)
+savefig(plotsdir("p1_vs_ratio.png"))
+```
+
+## Средний выигрыш Нападающего
+
+```{julia}
+grp = groupby(filtered, [:V1, :V2])
+summ = combine(grp, :UA => mean => :UA_mean)
+heatmap(sort(unique(summ.V1)), sort(unique(summ.V2)),
+    (x, y) -> summ[(summ.V1 .== x) .& (summ.V2 .== y), :UA_mean][1],
+    xlabel = "V1", ylabel = "V2", title = "Средний выигрыш Нападающего")
+savefig(plotsdir("heatmap_UA.png"))
+```
+
+## Выигрыш Защитника от стоимости защиты
+
+Задача работы требует показать зависимость выигрыша от стоимости
+защиты. Берём $V = (10, 5)$, $c_a = 1$ и меняем $c_d$.
+
+```{julia}
+cds = 0.0:0.5:6.0
+UD = [run_simulation(Dict("V" => [10.0, 5.0], "c_a" => 1.0, "c_d" => cd))["UD"]
+      for cd in cds]
+plot(cds, UD, marker = :o, lw = 2, label = "",
+    xlabel = "c_d (стоимость защиты)", ylabel = "UD",
+    title = "Выигрыш Защитника от стоимости защиты")
+savefig(plotsdir("UD_vs_cd.png"))
+```
+
+---
+
+*This page was generated using [Literate.jl](https://github.com/fredrikekre/Literate.jl).*
+
